@@ -1,0 +1,33 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: postgres-db
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: Admin@123
+      POSTGRES_DB: my_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin -d my_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+  qdrant:
+    image: qdrant/qdrant:v1.12.0
+    container_name: qdrant-vector
+    restart: always
+    ports:
+      - "6333:6333"
+      - "6334:6334"
+    volumes:
+      - qdrant_data:/qdrant/storage
+    environment:
+      QDRANT_ALLOW_RECOVERY_MODE: "true"
+volumes:
+  postgres_data:
+  qdrant_data:
+  ollama_models:

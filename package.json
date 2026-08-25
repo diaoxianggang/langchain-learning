@@ -1,0 +1,49 @@
+{
+  "name": "langchain-ts-examples",
+  "version": "1.0.0",
+  "description": "LangChain TypeScript v1.x 示例代码，使用 MIMO 模型",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "10": "tsx src/10_tool_calling_chain.ts",
+    "11": "tsx src/11_middleware.ts",
+    "12": "tsx src/12_agent.ts",
+    "13": "tsx src/13_agent_createAgent.ts",
+    "01": "tsx src/01_chat_model.ts",
+    "02": "tsx src/02_prompt_template.ts",
+    "03": "tsx src/03_lcel_chain.ts",
+    "04": "tsx src/04_output_parser.ts",
+    "05": "tsx src/05_streaming.ts",
+    "06": "tsx src/06_structured_output.ts",
+    "07": "tsx src/07_tools_and_agent.ts",
+    "08": "tsx src/08_memory.ts",
+    "09": "tsx src/09_rag.ts",
+    "kb:server": "bun run src/real-project-combat/server/index.ts",
+    "kb:web": "cd src/real-project-combat/web && bun run dev",
+    "kb:ingest": "bun run src/real-project-combat/scripts/ingest.ts"
+  },
+  "dependencies": {
+    "@langchain/classic": "^1.0.45",
+    "@langchain/core": "^1.0.0",
+    "@langchain/langgraph": "^1.4.12",
+    "@langchain/langgraph-checkpoint-postgres": "^1.0.5",
+    "@langchain/ollama": "^1.3.0",
+    "@langchain/openai": "^1.0.0",
+    "@langchain/qdrant": "^1.0.3",
+    "@langchain/textsplitters": "^0.1.0",
+    "dotenv": "^16.4.0",
+    "hono": "^4.13.4",
+    "langchain": "^1.0.0",
+    "pg": "^8.23.0",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.4.0",
+    "@types/node": "^22.0.0",
+    "@types/pg": "^8.23.1",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0"
+  }
+}

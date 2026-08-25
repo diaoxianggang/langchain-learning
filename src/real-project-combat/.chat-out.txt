@@ -1,0 +1,374 @@
+﻿data: {"type":"session","sessionId":"test-session-001"}
+
+data: {"type":"token","content":"## R"}
+
+data: {"type":"token","content":"AG vs 微"}
+
+data: {"type":"token","content":"调（Fine-t"}
+
+data: {"type":"token","content":"uning）对比\n\n"}
+
+data: {"type":"token","content":"###"}
+
+data: {"type":"token","content":"📊 "}
+
+data: {"type":"token","content":"核心对比"}
+
+data: {"type":"token","content":"表"}
+
+data: {"type":"token","content":"\n\n| 维"}
+
+data: {"type":"token","content":"度 | RAG"}
+
+data: {"type":"token","content":" | Fine"}
+
+data: {"type":"token","content":"-tuning |\n|"}
+
+data: {"type":"token","content":"------|-----|"}
+
+data: {"type":"token","content":"-------------|\n| **"}
+
+data: {"type":"token","content":"知识更新** |"}
+
+data: {"type":"token","content":" 替换文档"}
+
+data: {"type":"token","content":"即可，实时生效"}
+
+data: {"type":"token","content":" | 需"}
+
+data: {"type":"token","content":"要重新训练模型"}
+
+data: {"type":"token","content":" |\n| **成本"}
+
+data: {"type":"token","content":"** | "}
+
+data: {"type":"token","content":"低，只需要"}
+
+data: {"type":"token","content":"向量数据库 |"}
+
+data: {"type":"token","content":" 高，需要"}
+
+data: {"type":"token","content":" GPU 和训练数据"}
+
+data: {"type":"token","content":" |\n| **可"}
+
+data: {"type":"token","content":"溯源** | "}
+
+data: {"type":"token","content":"可以指出答案"}
+
+data: {"type":"token","content":"来自哪个文档 |"}
+
+data: {"type":"token","content":" 难以"}
+
+data: {"type":"token","content":"追溯知识来源 |\n"}
+
+data: {"type":"token","content":"| **适用场景"}
+
+data: {"type":"token","content":"** | 知"}
+
+data: {"type":"token","content":"识问答、文档"}
+
+data: {"type":"token","content":"搜索 | "}
+
+data: {"type":"token","content":"风格迁移、"}
+
+data: {"type":"token","content":"特定任务优化 |\n"}
+
+data: {"type":"token","content":"| **延迟**"}
+
+data: {"type":"token","content":" | 需"}
+
+data: {"type":"token","content":"要额外的检索"}
+
+data: {"type":"token","content":"步骤 | 推"}
+
+data: {"type":"token","content":"理时无额外"}
+
+data: {"type":"token","content":"开销 |\n\n---\n\n"}
+
+data: {"type":"token","content":"### 🎯"}
+
+data: {"type":"token","content":" R"}
+
+data: {"type":"token","content":"AG 的"}
+
+data: {"type":"token","content":"优"}
+
+data: {"type":"token","content":"缺点\n\n**✅"}
+
+data: {"type":"token","content":" 优点：**\n"}
+
+data: {"type":"token","content":"- **知识更新"}
+
+data: {"type":"token","content":"快**：只需"}
+
+data: {"type":"token","content":"更新文档库"}
+
+data: {"type":"token","content":"，无需重新训练"}
+
+data: {"type":"token","content":"\n- **成本"}
+
+data: {"type":"token","content":"低**：只需"}
+
+data: {"type":"token","content":"向量数据库，"}
+
+data: {"type":"token","content":"不需要"}
+
+data: {"type":"token","content":"昂贵的 GPU "}
+
+data: {"type":"token","content":"训练\n-"}
+
+data: {"type":"token","content":" **可溯源**"}
+
+data: {"type":"token","content":"：能明确指出"}
+
+data: {"type":"token","content":"答案来自哪个文档"}
+
+data: {"type":"token","content":"片段"}
+
+data: {"type":"token","content":"\n- **减少"}
+
+data: {"type":"token","content":"幻觉**："}
+
+data: {"type":"token","content":"基于真实文档生成"}
+
+data: {"type":"token","content":"回答"}
+
+data: {"type":"token","content":"，而非"}
+
+data: {"type":"token","content":"凭"}
+
+data: {"type":"token","content":"空编"}
+
+data: {"type":"token","content":"造\n- **"}
+
+data: {"type":"token","content":"适合"}
+
+data: {"type":"token","content":"知识"}
+
+data: {"type":"token","content":"密集型任务"}
+
+data: {"type":"token","content":"**：如文档"}
+
+data: {"type":"token","content":"问答、技术支持"}
+
+data: {"type":"token","content":"等"}
+
+data: {"type":"token","content":"\n\n**❌ "}
+
+data: {"type":"token","content":"缺点：**\n"}
+
+data: {"type":"token","content":"- **增加"}
+
+data: {"type":"token","content":"延迟**：需要"}
+
+data: {"type":"token","content":"额外的检索步骤"}
+
+data: {"type":"token","content":"\n- **依赖"}
+
+data: {"type":"token","content":"检索质量**："}
+
+data: {"type":"token","content":"如果检索不到"}
+
+data: {"type":"token","content":"相关内容"}
+
+data: {"type":"token","content":"，回答"}
+
+data: {"type":"token","content":"质量会下降\n"}
+
+data: {"type":"token","content":"- **上下"}
+
+data: {"type":"token","content":"文窗口限制**"}
+
+data: {"type":"token","content":"：只能注入"}
+
+data: {"type":"token","content":"部分"}
+
+data: {"type":"token","content":"文档片段"}
+
+data: {"type":"token","content":"，"}
+
+data: {"type":"token","content":"可能遗漏"}
+
+data: {"type":"token","content":"信息"}
+
+data: {"type":"token","content":"\n\n---\n\n### "}
+
+data: {"type":"token","content":"🎯 微"}
+
+data: {"type":"token","content":"调的优缺点"}
+
+data: {"type":"token","content":"\n\n**✅ "}
+
+data: {"type":"token","content":"优点：**\n-"}
+
+data: {"type":"token","content":" **推理"}
+
+data: {"type":"token","content":"速度快**：无需"}
+
+data: {"type":"token","content":"检索"}
+
+data: {"type":"token","content":"步骤，响应"}
+
+data: {"type":"token","content":"更快"}
+
+data: {"type":"token","content":"\n- **能"}
+
+data: {"type":"token","content":"改变"}
+
+data: {"type":"token","content":"模型行为风格"}
+
+data: {"type":"token","content":"**：如"}
+
+data: {"type":"token","content":"调整"}
+
+data: {"type":"token","content":"语气、格式、"}
+
+data: {"type":"token","content":"回答"}
+
+data: {"type":"token","content":"方式"}
+
+data: {"type":"token","content":"\n- **适合"}
+
+data: {"type":"token","content":"特定任务优化"}
+
+data: {"type":"token","content":"**：如代码"}
+
+data: {"type":"token","content":"生成、特定"}
+
+data: {"type":"token","content":"领域推理"}
+
+data: {"type":"token","content":"**❌ 缺"}
+
+data: {"type":"token","content":"点：**\n-"}
+
+data: {"type":"token","content":" **知识"}
+
+data: {"type":"token","content":"更新慢"}
+
+data: {"type":"token","content":"**：每次"}
+
+data: {"type":"token","content":"更新都需要重新训练"}
+
+data: {"type":"token","content":"模型\n- **"}
+
+data: {"type":"token","content":"成本高**："}
+
+data: {"type":"token","content":"需要 GPU"}
+
+data: {"type":"token","content":"资源和高质量"}
+
+data: {"type":"token","content":"训练数据\n-"}
+
+data: {"type":"token","content":" **难以溯源**"}
+
+data: {"type":"token","content":"：无法追踪"}
+
+data: {"type":"token","content":"回答"}
+
+data: {"type":"token","content":"来自"}
+
+data: {"type":"token","content":"哪个具体来源"}
+
+data: {"type":"token","content":"\n- **可能"}
+
+data: {"type":"token","content":"产生幻"}
+
+data: {"type":"token","content":"觉**：模型"}
+
+data: {"type":"token","content":"可能\"创造性"}
+
+data: {"type":"token","content":"\""}
+
+data: {"type":"token","content":"地回答"}
+
+data: {"type":"token","content":"问题\n\n---\n\n###"}
+
+data: {"type":"token","content":" 💡 选择"}
+
+data: {"type":"token","content":"建议\n\n**"}
+
+data: {"type":"token","content":"大多数场景下"}
+
+data: {"type":"token","content":"，RAG 是"}
+
+data: {"type":"token","content":"更好的起点**"}
+
+data: {"type":"token","content":"。"}
+
+data: {"type":"token","content":"只有当你需要：\n\n"}
+
+data: {"type":"token","content":"1. **改变"}
+
+data: {"type":"token","content":"模型的行为风格**"}
+
+data: {"type":"token","content":"（如让"}
+
+data: {"type":"token","content":"模型"}
+
+data: {"type":"token","content":"用"}
+
+data: {"type":"token","content":"特定语气"}
+
+data: {"type":"token","content":"回答"}
+
+data: {"type":"token","content":"）\n2. **"}
+
+data: {"type":"token","content":"优化特定任务的"}
+
+data: {"type":"token","content":"推理能力**（"}
+
+data: {"type":"token","content":"如代码生成、"}
+
+data: {"type":"token","content":"数学推理"}
+
+data: {"type":"token","content":"）\n3. **"}
+
+data: {"type":"token","content":"有"}
+
+data: {"type":"token","content":"足够"}
+
+data: {"type":"token","content":"高质量"}
+
+data: {"type":"token","content":"的训练数据和"}
+
+data: {"type":"token","content":" GPU"}
+
+data: {"type":"token","content":" 资源"}
+
+data: {"type":"token","content":"**\n\n时"}
+
+data: {"type":"token","content":"，才考虑 Fine"}
+
+data: {"type":"token","content":"-tuning。\n\n**"}
+
+data: {"type":"token","content":"最佳"}
+
+data: {"type":"token","content":"实践**：两者"}
+
+data: {"type":"token","content":"可以结合使用——"}
+
+data: {"type":"token","content":"用"}
+
+data: {"type":"token","content":"微调调整"}
+
+data: {"type":"token","content":"模型行为"}
+
+data: {"type":"token","content":"风格"}
+
+data: {"type":"token","content":"，用 RAG"}
+
+data: {"type":"token","content":" 注入最新"}
+
+data: {"type":"token","content":"知识。\n\n---\n\n**"}
+
+data: {"type":"token","content":"信息来源**："}
+
+data: {"type":"token","content":"`08-r"}
+
+data: {"type":"token","content":"ag.md` 文"}
+
+data: {"type":"token","content":"档"}
+
+data: {"type":"done","sessionId":"test-session-001"}
+
