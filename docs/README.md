@@ -2,12 +2,13 @@
 
 ## 教程简介
 
-本教程面向希望使用 TypeScript 构建 LLM 应用的开发者。通过 11 个渐进式示例，你将从零掌握 LangChain 的核心概念与实战技巧。每个示例都是独立可运行的 `.ts` 文件，配有详细中文注释，方便边学边练。
+本教程面向希望使用 TypeScript 构建 LLM 应用的开发者。通过 13 个渐进式章节，你将从零掌握 LangChain 的核心概念与实战技巧，并进一步学习个人知识库项目使用的两大关键基础设施：**Hono 后端框架**与 **Prisma ORM**。每个 LangChain 示例都是独立可运行的 `.ts` 文件；每个后端教程都结合了本项目 `src/real-project-combat/` 中的真实实现，配有详细中文讲解，方便边学边练。
 
 **适合人群：**
 - 有 TypeScript 基础，想了解 LLM 应用开发的前端/全栈工程师
 - 熟悉 Python LangChain，希望迁移到 TypeScript 生态的开发者
-- 需要在 Node.js 服务中集成大模型能力的后端工程师
+- 需要在 Node.js / Bun 服务中集成大模型能力，并希望构建 REST/SSE API 的后端工程师
+- 想把个人/团队文档沉淀为"向量知识库 + 问答系统"的读者
 
 ## LangChain 生态概览
 
@@ -85,20 +86,23 @@ export async function createMimoModel(temperature = 0.7, maxTokens = 2048) {
 
 ## 学习路线
 
-| 章节 | 核心知识点 | 涉及示例文件 | 难度 |
+| 章节 | 核心知识点 | 涉及示例/文件 | 难度 |
 |------|-----------|-------------|------|
-| [第1节 快速开始](./01-quickstart.md) | Chat Model, 消息类型, Token | `01_chat_model.ts` | 初级 |
-| [第2节 提示词工程](./02-prompt-engineering.md) | PromptTemplate, ChatPromptTemplate | `02_prompt_template.ts` | 初级 |
-| [第3节 LCEL 管道](./03-lcel.md) | `.pipe()`, `batch()`, Zod | `03_lcel_chain.ts` | 初级 |
-| [第4节 输出解析](./04-output-parsing.md) | OutputParser, 结构化输出 | `04_output_parser.ts`, `06_structured_output.ts` | 中级 |
-| [第5节 流式输出](./05-streaming.md) | `stream()`, AsyncIterable | `05_streaming.ts` | 中级 |
-| [第6节 工具调用](./06-tools.md) | `tool()`, `bindTools()`, ReAct | `07_tools_and_agent.ts`, `10_tool_calling_chain.ts` | 中级 |
-| [第7节 对话记忆](./07-memory.md) | 消息历史管理 | `08_memory.ts` | 中级 |
-| [第8节 RAG](./08-rag.md) | Document, TextSplitter, 检索 | `09_rag.ts` | 高级 |
-| [第9节 进阶](./09-advanced.md) | 中间件, 回调, RunnableLambda | `11_middleware.ts` | 高级 |
-| [第10节 智能代理](./10-agent.md) | Agent, ReAct, 多步推理, 对话记忆 | `12_agent.ts`, `13_agent_createAgent.ts` | 高级 |
+| [第1节 快速开始](./01-quickstart.md) | Chat Model, 消息类型, Token | `src/01_chat_model.ts` | 初级 |
+| [第2节 提示词工程](./02-prompt-engineering.md) | PromptTemplate, ChatPromptTemplate | `src/02_prompt_template.ts` | 初级 |
+| [第3节 LCEL 管道](./03-lcel.md) | `.pipe()`, `batch()`, Zod | `src/03_lcel_chain.ts` | 初级 |
+| [第4节 输出解析](./04-output-parsing.md) | OutputParser, 结构化输出 | `src/04_output_parser.ts`, `src/06_structured_output.ts` | 中级 |
+| [第5节 流式输出](./05-streaming.md) | `stream()`, AsyncIterable | `src/05_streaming.ts` | 中级 |
+| [第6节 工具调用](./06-tools.md) | `tool()`, `bindTools()`, ReAct | `src/07_tools_and_agent.ts`, `src/10_tool_calling_chain.ts` | 中级 |
+| [第7节 对话记忆](./07-memory.md) | 消息历史管理 | `src/08_memory.ts` | 中级 |
+| [第8节 RAG](./08-rag.md) | Document, TextSplitter, 检索 | `src/09_rag.ts` | 高级 |
+| [第9节 进阶](./09-advanced.md) | 中间件, 回调, RunnableLambda | `src/11_middleware.ts` | 高级 |
+| [第10节 智能代理](./10-agent.md) | Agent, ReAct, 多步推理, 对话记忆 | `src/12_agent.ts`, `src/13_agent_createAgent.ts` | 高级 |
+| — | — | **以下为个人知识库项目的支撑技术（结合实际代码讲解）** | — |
+| [第14节 Hono](./14-hono.md) | 轻量化后端、路由模块化、SSE 流式、Bun.serve | `src/real-project-combat/server/app.ts`、`server/routes/*` | 中级 |
+| [第15节 Prisma ORM](./15-prisma.md) | schema.prisma、Prisma Client、CRUD/聚合、与 pg 共存 | `prisma/schema.prisma`、`server/services/prisma.ts`、`documentRegistry.ts` | 中级 |
 
-建议按顺序学习。初级部分介绍了 LangChain 的基础构建块；中级部分展示如何组合这些构建块完成实际任务；高级部分涉及生产环境中常见的架构模式。
+建议按顺序学习。初级部分介绍了 LangChain 的基础构建块；中级部分展示如何组合这些构建块完成实际任务，以及如何把能力通过 Hono 暴露为 API；高级部分涉及生产环境中常见的架构模式、RAG 检索增强和 Agent 智能代理，最后用 Prisma ORM 把文档元数据沉淀到 PostgreSQL。
 
 ---
 
@@ -297,7 +301,34 @@ npm run 12    # Agent（手写 ReAct）
 npm run 13    # Agent（createAgent 生产用法）
 ```
 
-运行前请确保已正确配置 `.env` 文件。
+### 个人知识库项目：启动与脚本
+
+对应第 14~15 节的实战项目（`src/real-project-combat/`），启动与常用脚本如下：
+
+```bash
+# 1) 启动 PostgreSQL + Qdrant 容器（使用仓库根目录 docker-compose.yml）
+docker compose up -d
+
+# 2) 启动 Hono 后端（端口 3001，Bun.serve + Prisma ORM）
+npm run kb:server
+
+# 3) 启动 Vue 3.5 前端（端口 5173，/api 代理到后端）
+npm run kb:web
+
+# 4) 命令行触发文档入库（增量同步：递归扫描 docs -> 解析 -> 向量化 -> Qdrant + 文档注册表）
+npm run kb:ingest
+
+# 5) Prisma：生成客户端（每次修改 schema.prisma 后必跑）
+npm run prisma:generate
+
+# 6) Prisma：把 schema 对齐到 PostgreSQL（个人项目推荐 db push）
+npm run prisma:push
+```
+
+运行前请确保已正确配置 `.env` 文件，尤其以下两项需同时存在（值通常相同）：
+
+- `DATABASE_URL=postgres://admin:Admin@123@localhost:5432/my_db`（Prisma 专用）
+- `PG_CONNECTION_STRING=postgres://admin:Admin@123@localhost:5432/my_db`（PostgresSaver 用）
 
 ## 项目结构
 
@@ -305,6 +336,11 @@ npm run 13    # Agent（createAgent 生产用法）
 langchain-ts/
   docs/
     README.md              -- 本文档
+    01~10-*.md             -- LangChain 新手教程
+    14-hono.md             -- Hono 后端框架新手教程（配合 real-project-combat/server/*）
+    15-prisma.md           -- Prisma ORM 新手教程（配合 prisma/schema.prisma 与 services）
+  prisma/
+    schema.prisma          -- Prisma schema：映射 PostgreSQL 的 documents + checkpoint_* 五张表
   src/
     config.ts              -- 共享模型配置（createMimoModel）
     01_chat_model.ts       -- Chat Model 基础用法
@@ -320,9 +356,15 @@ langchain-ts/
     11_middleware.ts        -- 中间件与回调
     12_agent.ts            -- 智能代理（Agent）完整实战
     13_agent_createAgent.ts -- createAgent 生产版 Agent（记忆/流式）
-  .env                     -- API Key 配置
+    real-project-combat/   -- ★ 个人知识库完整项目
+      server/              --   Hono + Bun + TypeScript 后端（Prisma/PG + Qdrant + Mimo + Ollama）
+      web/                 --   Vue 3.5 + Vite 前端
+      scripts/ingest.ts    --   CLI 入库脚本
+      README.md            --   知识库项目独立文档
+  .env                     -- API Key + 数据库连接串 + Prisma DATABASE_URL
   package.json             -- 项目依赖与脚本
   tsconfig.json            -- TypeScript 配置
+  docker-compose.yml       -- PostgreSQL(postgres-db:5432) + Qdrant(qdrant-vector:6333)
 ```
 
 ---
@@ -344,3 +386,46 @@ langchain-ts/
 | 实战 | 工具集定义、ReAct 循环实现、单次问答、多轮对话、自定义行为 |
 | | 代码级对比：手写实现 vs `createAgent`（记忆/流式等增强能力） |
 | 进阶补充 | 使用场景、常见问题、LangGraph、Agent 局限性 |
+
+---
+
+### 第14节：Hono — 为 LangChain 应用写一个轻量、超快的后端
+
+> [查看教程](./14-hono.md) | 启动命令：`npm run kb:server`
+
+| 章节 | 内容 |
+|------|------|
+| 简介 | Hono 的定位、优势、与 Bun.serve 的搭配方式 |
+| 核心概念 | `new Hono()` 与 `app.fetch` 的最小骨架 |
+| | `Bun.serve({ fetch: app.fetch })` 在 Bun 上启动 |
+| | 路由、参数、响应（query / path param / json / status code） |
+| | 路由模块化：`app.route("/api/x", routes)` |
+| | CORS 中间件 vs Vite 代理两种跨域方案 |
+| | SSE 流式输出：`ReadableStream` + `Content-Type: text/event-stream` |
+| | 分层架构：Hono 只做 HTTP，LangChain 逻辑落在 services/* |
+| 流程图解 | HTTP 请求经 Bun → Hono → routes → services → 基础设施 |
+| 实战 | 写最小 20 行 demo → 调用项目真实接口 → 验证 /api/chat 流式 |
+| 进阶补充 | Hono vs Express/Fastify/Nest 选型、常见坑位、下一步建议 |
+
+---
+
+### 第15节：Prisma ORM — 让 PostgreSQL 的增删改查变成 TypeScript 的快乐
+
+> [查看教程](./15-prisma.md) | 初始化命令：`npm run prisma:generate` / `npm run prisma:push`
+
+| 章节 | 内容 |
+|------|------|
+| 简介 | Prisma 的三步工作流、与个人知识库项目的结合方式 |
+| 核心概念 | `schema.prisma`：generator / datasource / model 三段式 |
+| | 字段类型：Int / String / DateTime / Json、`@default` / `@unique` / `@id` |
+| | 列/表映射：`@map("xxx")` / `@@map("xxx")` 对齐 PG snake_case |
+| | `DATABASE_URL` 与 `PG_CONNECTION_STRING` 的语义差异 |
+| | Prisma Client 单例 + 懒加载（避免连接数爆炸） |
+| | 一把梭 CRUD：findUnique/findFirst/findMany/count/aggregate/create/update/upsert/delete |
+| | aggregate + count 并发统计的真实 stats 实现 |
+| | `prisma db push` vs `prisma migrate dev` 两种对齐方式 |
+| | 与原生 `pg` 包共存：PostgresSaver 写入、$queryRaw 复杂 SQL、DDL 清理 |
+| 流程图解 | schema → prisma generate → 业务 CRUD → PostgreSQL（documents vs checkpoint 两张独立写入路径） |
+| 实战 | Docker PG 准备 → 安装依赖 + generate + push → 30 行 CRUD demo 脚本 → 调用项目真实的 ingest/stats/documents API |
+| 进阶补充 | Prisma/LangChain `Document` 同名冲突的两种规避方案、CLI/Client 版本一致性、`$transaction` 事务、连接池、常见坑位速查 |
+
