@@ -48,7 +48,7 @@ export async function ingestAll(): Promise<IngestResult> {
       const existing = await getByPath(source);
 
       // 增量：内容未变化则跳过
-      if (existing && existing.file_hash === fileHash) {
+      if (existing && existing.fileHash === fileHash) {
         result.skipped.push(source);
         continue;
       }

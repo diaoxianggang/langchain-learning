@@ -1,0 +1,74 @@
+// Prisma 生成的客户端用于知识库项目文档注册表等数据操作
+// PostgreSQL 连接串（Prisma 会从根目录 .env 读取 DATABASE_URL）
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// 文档注册表：记录已入库文档的元数据，驱动增量同步
+model Document {
+  id              Int       @id @default(autoincrement())
+  sourcePath      String    @unique @map("source_path")
+  fileHash        String    @map("file_hash")
+  chunkCount      Int       @default(0) @map("chunk_count")
+  status          String    @default("pending")
+  lastIngestedAt  DateTime? @map("last_ingested_at") @db.Timestamptz()
+  createdAt       DateTime? @default(now()) @map("created_at") @db.Timestamptz()
+
+  @@map("documents")
+}
+
+// ========== 以下为 @langchain/langgraph-checkpoint-postgres 使用的表结构 ==========
+// 我们在 Prisma schema 中保留它们的精确映射（字段/复合主键），以便：
+//   - Prisma DB push 不会破坏已有表结构
+//   - 也允许应用侧通过 Prisma 查询/维护（如清空 checkpoint 表）
+// 注：PostgresSaver 仍通过 pg 直接读写，不由 Prisma 管理写入。
+
+model Checkpoints {
+  threadId            String   @map("thread_id")
+  checkpointNs        String   @default("") @map("checkpoint_ns")
+  checkpointId        String   @map("checkpoint_id")
+  parentCheckpointId  String?  @map("parent_checkpoint_id")
+  type                String?
+  checkpoint          Json
+  metadata            Json     @default("{}")
+
+  @@id([threadId, checkpointNs, checkpointId])
+  @@map("checkpoints")
+}
+
+model CheckpointBlobs {
+  threadId      String   @map("thread_id")
+  checkpointNs  String   @default("") @map("checkpoint_ns")
+  channel       String
+  version       String
+  type          String
+  blob          Bytes?
+
+  @@id([threadId, checkpointNs, channel, version])
+  @@map("checkpoint_blobs")
+}
+
+model CheckpointWrites {
+  threadId      String  @map("thread_id")
+  checkpointNs  String  @default("") @map("checkpoint_ns")
+  checkpointId  String  @map("checkpoint_id")
+  taskId        String  @map("task_id")
+  idx           Int
+  channel       String
+  type          String?
+  blob          Bytes
+
+  @@id([threadId, checkpointNs, checkpointId, taskId, idx])
+  @@map("checkpoint_writes")
+}
+
+model CheckpointMigrations {
+  v  Int  @id
+
+  @@map("checkpoint_migrations")
+}

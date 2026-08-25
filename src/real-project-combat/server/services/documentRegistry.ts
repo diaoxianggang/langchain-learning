@@ -1,18 +1,20 @@
 /**
- * 个人知识库 - 文档注册表
- * 基于 PostgreSQL documents 表，管理文档入库元数据。
+ * 个人知识库 - 文档注册表（迁移至 Prisma ORM）
+ * 完全替换原 pg 原生实现：所有增删改查 / 聚合统计统一走 Prisma。
+ *
+ * 模型类型不直接从 "@prisma/client" 导入裸 `Document`：
+ *   - 本仓库的 LangChain 也导出了同名类型 `Document`（@langchain/core/documents），
+ *     极易造成同名符号解析冲突，进而触发"@prisma/client 没有导出成员 Document"。
+ *   - 这里通过 `getPrisma()` 的查询返回值反向推导 DocumentRecord，保证类型一致且
+ *     与 Prisma Client 生成产物保持同步。
  */
-import { getPg } from "./postgres.js";
+import type { getPrisma as _getPrisma } from "./prisma.js";
+import { getPrisma } from "./prisma.js";
 
-export interface DocumentRecord {
-  id: number;
-  source_path: string;
-  file_hash: string;
-  chunk_count: number;
-  status: string;
-  last_ingested_at: Date | null;
-  created_at: Date;
-}
+/** 从 Prisma document.findUnique 的返回值推导 Document 记录类型 */
+type PrismaDocFn = ReturnType<typeof _getPrisma>["document"]["findUnique"];
+type PrismaDocAwait = Awaited<ReturnType<PrismaDocFn>>;
+export type DocumentRecord = Exclude<PrismaDocAwait, null>;
 
 export interface UpsertInput {
   source_path: string;
@@ -27,40 +29,41 @@ export interface UpsertInput {
 export async function getByPath(
   sourcePath: string
 ): Promise<DocumentRecord | undefined> {
-  const db = await getPg();
-  const res = await db.query(
-    "SELECT * FROM documents WHERE source_path = $1",
-    [sourcePath]
-  );
-  return res.rows[0];
+  const doc = await getPrisma().document.findUnique({
+    where: { sourcePath },
+  });
+  return doc ?? undefined;
 }
 
 /**
  * 插入或更新文档记录（以 source_path 为唯一键）
  */
 export async function upsert(input: UpsertInput): Promise<void> {
-  const db = await getPg();
-  await db.query(
-    `INSERT INTO documents (source_path, file_hash, chunk_count, status, last_ingested_at)
-     VALUES ($1, $2, $3, $4, now())
-     ON CONFLICT (source_path)
-     DO UPDATE SET file_hash = EXCLUDED.file_hash,
-                   chunk_count = EXCLUDED.chunk_count,
-                   status = EXCLUDED.status,
-                   last_ingested_at = now()`,
-    [input.source_path, input.file_hash, input.chunk_count, input.status]
-  );
+  await getPrisma().document.upsert({
+    where: { sourcePath: input.source_path },
+    create: {
+      sourcePath: input.source_path,
+      fileHash: input.file_hash,
+      chunkCount: input.chunk_count,
+      status: input.status,
+      lastIngestedAt: new Date(),
+    },
+    update: {
+      fileHash: input.file_hash,
+      chunkCount: input.chunk_count,
+      status: input.status,
+      lastIngestedAt: new Date(),
+    },
+  });
 }
 
 /**
  * 列出全部文档记录（按最后入库时间倒序）
  */
 export async function listAll(): Promise<DocumentRecord[]> {
-  const db = await getPg();
-  const res = await db.query(
-    "SELECT * FROM documents ORDER BY last_ingested_at DESC NULLS LAST"
-  );
-  return res.rows;
+  return getPrisma().document.findMany({
+    orderBy: { lastIngestedAt: { sort: "desc", nulls: "last" } },
+  });
 }
 
 /**
@@ -72,18 +75,19 @@ export async function stats(): Promise<{
   indexed: number;
   failed: number;
 }> {
-  const db = await getPg();
-  const res = await db.query(
-    `SELECT COUNT(*)::int AS total,
-            COALESCE(SUM(chunk_count), 0)::int AS chunks,
-            COUNT(*) FILTER (WHERE status = 'indexed')::int AS indexed,
-            COUNT(*) FILTER (WHERE status = 'failed')::int AS failed
-     FROM documents`
-  );
+  const prisma = getPrisma();
+  const [countRes, chunksRes, indexedRes, failedRes] = await Promise.all([
+    prisma.document.count(),
+    prisma.document.aggregate({
+      _sum: { chunkCount: true },
+    }),
+    prisma.document.count({ where: { status: "indexed" } }),
+    prisma.document.count({ where: { status: "failed" } }),
+  ]);
   return {
-    totalDocs: res.rows[0].total,
-    totalChunks: res.rows[0].chunks,
-    indexed: res.rows[0].indexed,
-    failed: res.rows[0].failed,
+    totalDocs: countRes,
+    totalChunks: chunksRes._sum.chunkCount ?? 0,
+    indexed: indexedRes,
+    failed: failedRes,
   };
 }

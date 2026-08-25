@@ -22,7 +22,9 @@
     "09": "tsx src/09_rag.ts",
     "kb:server": "bun run src/real-project-combat/server/index.ts",
     "kb:web": "cd src/real-project-combat/web && bun run dev",
-    "kb:ingest": "bun run src/real-project-combat/scripts/ingest.ts"
+    "kb:ingest": "bun run src/real-project-combat/scripts/ingest.ts",
+    "prisma:generate": "prisma generate",
+    "prisma:push": "prisma db push --skip-generate"
   },
   "dependencies": {
     "@langchain/classic": "^1.0.45",
@@ -33,6 +35,7 @@
     "@langchain/openai": "^1.0.0",
     "@langchain/qdrant": "^1.0.3",
     "@langchain/textsplitters": "^0.1.0",
+    "@prisma/client": "^6.19.3",
     "dotenv": "^16.4.0",
     "hono": "^4.13.4",
     "langchain": "^1.0.0",
@@ -43,6 +46,7 @@
     "@types/bun": "^1.4.0",
     "@types/node": "^22.0.0",
     "@types/pg": "^8.23.1",
+    "prisma": "^6.19.3",
     "tsx": "^4.19.0",
     "typescript": "^5.6.0"
   }
